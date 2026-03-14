@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ channelName }} transcript</title>
+<style>
+body { font-family: Arial; }
+.message { margin-bottom: 5px; }
+.user { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>{{ channelName }} Ticket Transcript</h1>
+
+<p><b>ID:</b> {{ ticket.id }}</p>
+<p><b>Created by:</b> {{ ticket.createdBy.displayName }}</p>
+
+<hr>
+
+{{ #ticket.archivedMessages }}
+<div class="message">
+<span>[{{ createdAtTimestamp }}]</span>
+<span class="user">{{author.displayName}}</span>:
+<span>{{ text }}</span>
+</div>
+{{ /ticket.archivedMessages }}
+
+</body>
+</html>
