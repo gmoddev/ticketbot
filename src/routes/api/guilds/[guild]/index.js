@@ -1,5 +1,5 @@
-const { getPrivilegeLevel } = require('../../../../lib/users');
-const { iconURL } = require('../../../../lib/misc');
+const { getPrivilegeLevel } = require('lib/users');
+const { iconURL } = require('lib/misc');
 
 module.exports.get = fastify => ({
 	handler: async (req, res) => {

@@ -4,8 +4,8 @@ const ms = require('ms');
 const pkg = require('../../../package.json');
 const {
 	getAverageTimes, getAverageRating,
-} = require('../../lib/stats');
-const { pools } = require('../../lib/threads');
+} = require('lib/stats');
+const { pools } = require('lib/threads');
 
 const { stats } = pools;
 

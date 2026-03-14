@@ -1,4 +1,4 @@
-const { pools } = require('../../../../../../lib/threads');
+const { pools } = require('lib/threads');
 const { crypto } = pools;
 
 module.exports.get = fastify => ({
