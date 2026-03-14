@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-const { logAdminEvent } = require('../../../../../lib/logging.js');
-const { iconURL } = require('../../../../../lib/misc');
+const { logAdminEvent } = require('lib/logging.js');
+const { iconURL } = require('lib/misc');
 const {
 	getAverageTimes, getAverageRating,
-} = require('../../../../../lib/stats');
+} = require('lib/stats');
 const ms = require('ms');
 
 module.exports.delete = fastify => ({

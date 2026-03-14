@@ -1,7 +1,7 @@
 const unzipper = require('unzipper');
 const { createInterface } = require('node:readline');
 const pkg = require('../../../../../../package.json');
-const { pools } = require('../../../../../lib/threads');
+const { pools } = require('lib/threads');
 
 const { import: pool } = pools;
 

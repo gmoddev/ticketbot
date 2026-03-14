@@ -1,8 +1,8 @@
 const { Readable } = require('node:stream');
 const archiver = require('archiver');
-const { iconURL } = require('../../../../../lib/misc');
+const { iconURL } = require('lib/misc');
 const pkg = require('../../../../../../package.json');
-const { pools } = require('../../../../../lib/threads');
+const { pools } = require('lib/threads');
 
 const { export: pool } = pools;
 

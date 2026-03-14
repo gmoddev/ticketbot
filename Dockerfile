@@ -30,11 +30,11 @@ RUN mkdir -p /home/container/user /home/container/logs \
 
 USER container
 ENV USER=container \
-	HOME=/home/container \
-	NODE_ENV=production \
-	HTTP_HOST=0.0.0.0 \
-	DOCKER=true
-
+    HOME=/home/container \
+    NODE_ENV=production \
+    HTTP_HOST=0.0.0.0 \
+    DOCKER=true \
+    NODE_PATH=/app/src
 WORKDIR /home/container
 
 COPY --from=builder --chown=container:container --chmod=777 /build /app
