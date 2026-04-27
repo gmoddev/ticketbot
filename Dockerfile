@@ -4,8 +4,6 @@ FROM oven/bun:1 AS builder
 
 WORKDIR /build
 
-RUN find /app -type f -name "*.sh" -exec sed -i 's/\r$//' {} \;
-
 COPY --link scripts scripts
 RUN chmod +x ./scripts/start.sh
 
@@ -40,6 +38,9 @@ ENV USER=container \
 WORKDIR /home/container
 
 COPY --from=builder --chown=container:container --chmod=777 /build /app
+
+RUN find /app -type f -name "*.sh" -exec sed -i 's/\r$//' {} \; \
+    && find /app -type f -name "*.sh" -exec chmod +x {} \;
 
 ENTRYPOINT [ "/app/scripts/start.sh" ]
 HEALTHCHECK --interval=15s --timeout=5s --start-period=60s \
