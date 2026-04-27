@@ -14,6 +14,7 @@ const { pools } = require('../../lib/threads');
 const { transcript: pool } = pools;
 
 function getTranscriptTemplateName(client) {
+	console.log(client.config)
 	return client.config.templates?.transcript || 'transcript.md';
 }
 
