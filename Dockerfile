@@ -4,6 +4,8 @@ FROM oven/bun:1 AS builder
 
 WORKDIR /build
 
+RUN find /app -type f -name "*.sh" -exec sed -i 's/\r$//' {} \;
+
 COPY --link scripts scripts
 RUN chmod +x ./scripts/start.sh
 
