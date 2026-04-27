@@ -60,6 +60,7 @@ const logger = require('./lib/logger');
 // create a Logger using the default config
 // and set listeners as early as possible.
 let config = YAML.parse(fs.readFileSync(path.join(__dirname, 'user/config.yml'), 'utf8'));
+console.log(config)
 let log = logger(config);
 
 function exit(signal) {
