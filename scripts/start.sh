@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-
+#
 if [ "$PTERODACTYL" = "true" ]; then
     rm -rf /home/container/app
     cp -R /app /home/container/
