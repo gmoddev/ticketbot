@@ -14,7 +14,6 @@ const { pools } = require('../../lib/threads');
 const { transcript: pool } = pools;
 
 function getTranscriptTemplateName(client) {
-	console.log(client.config)
 	return client.config.templates?.transcript || 'transcript.md';
 }
 
@@ -83,13 +82,8 @@ module.exports = class TranscriptSlashCommand extends SlashCommand {
 			.replace(/{+\s?(nick|display)(name)?\s?}+/gi, ticket.createdBy?.displayName)
 			.replace(/{+\s?num(ber)?\s?}+/gi, ticket.number);
 		const fileName = `${channelName}.${getTranscriptExtension(this.client)}`;
-		
-		const templatePath = getTranscriptTemplatePath(this.client)
-
-		console.log(templatePath)
-
 		const template = fs.readFileSync(
-			templatePath,
+			getTranscriptTemplatePath(this.client),
 			{ encoding: 'utf8' },
 		);
 		const transcript = Mustache.render(template, {
