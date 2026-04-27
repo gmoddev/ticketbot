@@ -60,7 +60,10 @@ module.exports = class Client extends FrameworkClient {
 		this.i18n = new I18n('en-GB', locales);
 
 		// to maintain references, these shouldn't be reassigned
+		for (const key of Object.keys(this.config)) delete this.config[key];
 		Object.assign(this.config, YAML.parse(fs.readFileSync('./user/config.yml', 'utf8')));
+
+		for (const key of Object.keys(this.log)) delete this.log[key];
 		Object.assign(this.log, logger(this.config));
 
 		this.banned_guilds = new Set(

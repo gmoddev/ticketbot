@@ -13,6 +13,19 @@ const { pools } = require('../../lib/threads');
 
 const { transcript: pool } = pools;
 
+function getTranscriptTemplateName(client) {
+	return client.config.templates?.transcript || 'transcript.md';
+}
+
+function getTranscriptTemplatePath(client) {
+	return join(process.cwd(), 'user/templates', getTranscriptTemplateName(client) + '.mustache');
+}
+
+function getTranscriptExtension(client) {
+	const templateName = getTranscriptTemplateName(client);
+	return templateName.split('.').pop();
+}
+
 module.exports = class TranscriptSlashCommand extends SlashCommand {
 	constructor(client, options) {
 		const name = 'transcript';
@@ -44,10 +57,6 @@ module.exports = class TranscriptSlashCommand extends SlashCommand {
 		});
 
 		Mustache.escape = text => text; // don't HTML-escape
-		this.template = fs.readFileSync(
-			join('./user/templates/', this.client.config.templates.transcript + '.mustache'),
-			{ encoding: 'utf8' },
-		);
 	}
 
 	shouldAllowAccess(interaction, ticket) {
@@ -72,8 +81,12 @@ module.exports = class TranscriptSlashCommand extends SlashCommand {
 			.replace(/{+\s?(user)?name\s?}+/gi, ticket.createdBy?.username)
 			.replace(/{+\s?(nick|display)(name)?\s?}+/gi, ticket.createdBy?.displayName)
 			.replace(/{+\s?num(ber)?\s?}+/gi, ticket.number);
-		const fileName = `${channelName}.${this.client.config.templates.transcript.split('.').slice(-1)[0]}`;
-		const transcript = Mustache.render(this.template, {
+		const fileName = `${channelName}.${getTranscriptExtension(this.client)}`;
+		const template = fs.readFileSync(
+			getTranscriptTemplatePath(this.client),
+			{ encoding: 'utf8' },
+		);
+		const transcript = Mustache.render(template, {
 			channelName,
 			closedAtFull: function () {
 				return new Intl.DateTimeFormat([ticket.guild.locale, 'en-GB'], {
